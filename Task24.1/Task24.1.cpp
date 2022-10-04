@@ -11,18 +11,6 @@ struct Tasks
 };
 int main()
 {
-	/*
-	std::time_t t = time(nullptr);
-	int f = 0;
-	std::cin >> f;
-	std::time_t d = time(NULL);
-
-	double tin = difftime(d, t);
-	std::time_t c = d + (std::time_t)tin;
-
-	std::tm* local = std::localtime(&c);
-	std::cout <<std::asctime(local) << std::endl;
-	*/
 	std::string command;
 	bool exit = true;
 	std::vector<Tasks> tracking;
@@ -64,7 +52,10 @@ int main()
 				if (tracking[i].end != 0)
 				{	
 					std::cout << "Name - " << tracking[i].name << std::endl;
-					std::cout <<"Task completion time - " << difftime(tracking[i].end, tracking[i].start)<<" seconds "<<std::endl;
+					std::time_t t = std::difftime(tracking[i].end, tracking[i].start);
+					std::tm tm = *std::localtime(&t);
+					std::cout << std::put_time(&tm, "%M:%S") << std::endl;
+					std::cout <<"Task completion time - " << std::difftime(tracking[i].end, tracking[i].start)<<" seconds "<<std::endl;
 				}
 				else
 				{
